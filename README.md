@@ -30,12 +30,12 @@ First take a look at Pub/Sub subscription: haven't heard but should be some spec
 
 - Create dataset named 'de_assignment' in BigQuery console.
 
-- Please check the DDL statement for creating table in `./BigQuery.sql`.
+- Please check the DDL statement for creating table in `./BigQuery.sql` .
 
 
 ### (3) Create a Python script to call API
 
-- Please check the script in `./GCP_Subscription.py`.
+- Please check the script in `./GCP_Subscription.py` .
 
 - The official python package for calling Google Cloud Pub/Sub API is here: https://docs.cloud.google.com/python/docs/reference/pubsub/latest.
 
@@ -73,12 +73,12 @@ With this set up, the script will only nack maximum 5 times and then forward the
 For refreshing table `aggregated_order`, 2 solutions to keep this table updated:
 
 ### (1) Full refresh per hour
-please check the SQL statement in `./aggregated_order_full_refresh.sql`
+please check the SQL statement in `./aggregated_order_full_refresh.sql` .
 
 ### (2) Incremental refresh per hour
-please check the SQL statement in `./aggregated_order_incremental_refresh.sql`
+please check the SQL statement in `./aggregated_order_incremental_refresh.sql` .
 
-It involves a scheduler for running queries periodically. I search on how to schedule recurring queries in BigQuery, the most straightforward way seems to be scheduling queries: https://docs.cloud.google.com/bigquery/docs/scheduling-queries, which enable us to do so just by clicking the 'Schedule' button and set up for 1 hour in console. Ideally there should be some setup conceptually equivalent to dbt model, so that the internalized lineage would automatically refresh all the downstream tables if we run `dbt run --select order_events+`.
+It involves a scheduler for running queries periodically. I search on how to schedule recurring queries in BigQuery, the most straightforward way seems to be scheduling queries: https://docs.cloud.google.com/bigquery/docs/scheduling-queries, which enable us to do so just by clicking the 'Schedule' button and set up for 1 hour in console. Ideally there should be some setup conceptually equivalent to dbt model, so that the internalized lineage would automatically refresh all the downstream tables if we run `dbt run --select order_events+` .
 
 ### The diagram gets updated too:
 
@@ -108,6 +108,6 @@ Source: https://developers.google.com/google-ads/api/reference/rpc/v23/UploadCli
     - partial_failure: required to be `true` to always carry out successful operation and return error for invalid ones.
     - validate_only
 
-### (3) The final diagram including conversion upload:
+### The final diagram including conversion upload:
 
 ![alt text](./screenshot/image-6.png)
