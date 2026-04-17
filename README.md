@@ -7,7 +7,7 @@ Detailed process of how I completed this assignment.
 ### (1) Create Dummy Data in GCP
 
 First take a look at Pub/Sub subscription: haven't heard but should be some specific API, find the official document https://docs.cloud.google.com/pubsub/docs/overview and understand its publish/subscription workflow:
-    ![alt text](image.png)
+    ![alt text](./screenshot/image.png)
 
 - Reopen the GCP project which I have owner role with and enabled Cloud Pub/Sub API
 - Create a topic named 'DE-Assignment' with a default pull subscription 'DE-Assignment-sub'
@@ -56,33 +56,33 @@ and yet it goes into a dead loop as it nack->ack->nack->ack...forever. I panic a
 
 Then I find they have a subscription property called 'dead-letter topic' to 'manage undeliverable messages that subscribers can't acknowledge, Pub/Sub can forward them to a dead-letter topic'. So I follow the guidance and create a dead-letter topic to store the bad messages.
 
-![alt text](image-1.png)
+![alt text](./screenshot/image-1.png)
 
 With this set up, the script will only nack maximum 5 times and then forward the message to dead-letter topic's subscription:
 
-![alt text](image-2.png)
+![alt text](./screenshot/image-2.png)
 
-![alt text](image-3.png)
+![alt text](./screenshot/image-3.png)
 
 ### In the end, the ideal setup should be like this diagram:
 
-![alt text](image-4.png)
+![alt text](./screenshot/image-4.png)
 
 ## 2. Aggregated Tables
 
 For refreshing table `aggregated_order`, 2 solutions to keep this table updated:
 
 ### (1) Full refresh per hour
-please check the SQL statement in `./aggregated_order_full_refresh.sql`.
+please check the SQL statement in `./aggregated_order_full_refresh.sql`
 
 ### (2) Incremental refresh per hour
-please check the SQL statement in `./aggregated_order_incremental_refresh.sql`.
+please check the SQL statement in `./aggregated_order_incremental_refresh.sql`
 
 It involves a scheduler for running queries periodically. I search on how to schedule recurring queries in BigQuery, the most straightforward way seems to be scheduling queries: https://docs.cloud.google.com/bigquery/docs/scheduling-queries, which enable us to do so just by clicking the 'Schedule' button and set up for 1 hour in console. Ideally there should be some setup conceptually equivalent to dbt model, so that the internalized lineage would automatically refresh all the downstream tables if we run `dbt run --select order_events+`.
 
 ### The diagram gets updated too:
 
-![alt text](image-5.png)
+![alt text](./screenshot/image-5.png)
 
 ## 3. Conversion Upload
 
@@ -110,4 +110,4 @@ Source: https://developers.google.com/google-ads/api/reference/rpc/v23/UploadCli
 
 ### (3) The final diagram including conversion upload:
 
-![alt text](image-6.png)
+![alt text](./screenshot/image-6.png)
