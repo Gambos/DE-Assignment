@@ -30,7 +30,7 @@ First take a look at Pub/Sub subscription: haven't heard but should be some spec
 
 - Create dataset named 'de_assignment' in BigQuery console.
 
-- Please check the DDL statement for creating table in `./BigQuery.sql` .
+- Please check the DDL statement for creating table in `./ingestion.sql` .
 
 
 ### (3) Create a Python script to call API
